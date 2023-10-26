@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://r531qrc0xhlt"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_hqs4c"]
+[ext_resource type="Texture2D" uid="uid://ko1rrawx77t4" path="res://logo.png" id="2_tmj0j"]
+[ext_resource type="PackedScene" uid="uid://3crjbalcsqbp" path="res://main_menu_theme_music.tscn" id="3_i4d42"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hqs4c")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 182.0
+offset_right = 22.0
+offset_bottom = 213.0
+grow_horizontal = 2
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 225.0
+offset_right = 23.0
+offset_bottom = 256.0
+grow_horizontal = 2
+text = "Quit"
+
+[node name="Logo" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 110.0
+offset_right = 20.0
+offset_bottom = 150.0
+grow_horizontal = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Logo"]
+position = Vector2(24, 15)
+scale = Vector2(0.221519, 0.221519)
+texture = ExtResource("2_tmj0j")
+
+[node name="MainMenuThemeMusic" parent="." instance=ExtResource("3_i4d42")]

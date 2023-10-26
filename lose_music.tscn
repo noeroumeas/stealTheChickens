@@ -4,3 +4,4 @@
 
 [node name="LoseMusic" type="AudioStreamPlayer"]
 stream = ExtResource("1_jjddj")
+autoplay = true

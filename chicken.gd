@@ -5,14 +5,25 @@ extends CharacterBody3D
 
 signal catched
 
+func _ready():
+	$SoundEffectPlay.start()
+
 func _physics_process(_delta):
 	move_and_slide()
-	
 
 func initialize(start_position, player_position):
 	set_global_position(start_position)
 	look_opposite_to(player_position)
 	rotate_to_random_direction()
+	play_sound_in_random_time()
+
+func play_sound_in_random_time():
+	var minWaitMusicTime = 0.01
+	var maxWaitMusicTime = 10
+	set_timer_random_time(minWaitMusicTime, maxWaitMusicTime)
+
+func set_timer_random_time(min, max):
+	$SoundEffectPlay.wait_time = randi_range(min, max)
 
 func move(player_position):
 	look_opposite_to(player_position)
@@ -35,3 +46,11 @@ func get_random_speed():
 func catch():
 	catched.emit(self)
 	queue_free()
+
+
+func _on_sound_effect_play_timeout():
+	print('here')
+	play_sound_effect();
+
+func play_sound_effect():
+	$SoundEffect.play()

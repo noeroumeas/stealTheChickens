@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://be8i6cmqtr7sl"]
+
+[ext_resource type="Script" path="res://LostMenu.gd" id="1_i33kf"]
+[ext_resource type="Texture2D" uid="uid://ko1rrawx77t4" path="res://logo.png" id="2_fmt2g"]
+[ext_resource type="PackedScene" uid="uid://cor0qmr0f0ec0" path="res://lose_music.tscn" id="3_tawnc"]
+
+[node name="LostMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i33kf")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 126.0
+offset_right = 38.0
+offset_bottom = 152.0
+grow_horizontal = 2
+text = "You lost..."
+
+[node name="RetryButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 160.0
+offset_right = 25.0
+offset_bottom = 191.0
+grow_horizontal = 2
+text = "Retry"
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 201.0
+offset_right = 48.0
+offset_bottom = 232.0
+grow_horizontal = 2
+text = "Main menu"
+
+[node name="Logo" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 59.0
+offset_right = 20.0
+offset_bottom = 99.0
+grow_horizontal = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Logo"]
+position = Vector2(24, 15)
+scale = Vector2(0.221519, 0.221519)
+texture = ExtResource("2_fmt2g")
+
+[node name="LoseMusic" parent="." instance=ExtResource("3_tawnc")]
+autoplay = true

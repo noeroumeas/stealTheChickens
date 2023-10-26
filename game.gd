@@ -6,13 +6,11 @@ extends Node3D
 var chickens = []
 var farmers = []
 
-var numberChickens = 1
+var numberChickens = 10
 var numberFarmers = 1
 
 func _ready():
 	start_main_game_music()
-	$UserInterface/Retry.hide()
-	$UserInterface/Win.hide()
 	init_number_chicken_left_label()
 	generate_chickens()
 	generate_farmers()
@@ -46,9 +44,8 @@ func on_chicken_catched(chicken):
 		win_game()
 
 func win_game():
-	$UserInterface/Win.show()
 	end_game()
-	#$WinMusic.play()
+	get_tree().change_scene_to_file("res://win_menu.tscn")	
 
 func generate_farmers():
 	for i in range(numberFarmers):
@@ -88,10 +85,9 @@ func _on_player_hit():
 	lost_game()
 
 func lost_game():
-	$UserInterface/Retry.show()
 	end_game()
 	$GameMainMusic.stop()
-	$LoseMusic.play()
+	get_tree().change_scene_to_file("res://lost_menu.tscn")
 
 func end_game():
 	$UserInterface/NumberChickensLeftLabel.hide()
@@ -112,6 +108,3 @@ func delete_objects_in_array(objects):
 		object.queue_free()
 	objects.clear()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept") and ($UserInterface/Retry.visible or $UserInterface/Win.visible):
-		get_tree().reload_current_scene()

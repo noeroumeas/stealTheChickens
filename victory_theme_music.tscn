@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl3b23lk3s5dm"]
+
+[ext_resource type="AudioStream" uid="uid://c4p63rttc56pc" path="res://main_game_music.mp3" id="1_exu4g"]
+
+[node name="VictoryThemeMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_exu4g")
+autoplay = true
