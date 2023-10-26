@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal hit
+
 # How fast the player moves in meters per second.
 @export var speed = 14
 # The downward acceleration when in the air, in meters per second squared.
@@ -23,9 +25,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 		
-		#func _physics_process(delta):
-	#...
-
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.look_at(position + direction, Vector3.UP)
@@ -39,4 +38,27 @@ func _physics_process(delta):
 
 	# Moving the Character
 	velocity = target_velocity
+	
+	# Iterate through all collisions that occurred this frame
+	for index in range(get_slide_collision_count()):
+		# We get one of the collisions with the player
+		var collision = get_slide_collision(index)
+
+		# If the collision is with ground
+		if collision.get_collider() == null:
+			continue
+		
+		# If the collider is with a mob
+		if collision.get_collider().is_in_group("chicken"):
+			var chicken = collision.get_collider()
+			chicken.catch()
+		if(collision.get_collider().is_in_group("farmer")):
+			var farmer = collision.get_collider()
+			farmer.catchPlayer();
+			die()
+	
 	move_and_slide()
+
+func die():
+	hit.emit()
+	queue_free()

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3maos1bmde40"]
+
+[ext_resource type="Script" path="res://farmer.gd" id="1_t12dn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bmgd1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8t2e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyak5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Farmer" type="CharacterBody3D" groups=["farmer"]]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_t12dn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bmgd1")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("BoxMesh_k8t2e")
+surface_material_override/0 = SubResource("StandardMaterial3D_iyak5")

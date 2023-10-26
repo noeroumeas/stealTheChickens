@@ -2,21 +2,23 @@
 
 [ext_resource type="Script" path="res://chicken.gd" id="1_mrid6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3bfq1"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_k42xu"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_ohjl8"]
+[sub_resource type="SphereMesh" id="SphereMesh_cfc0m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8h8o"]
 albedo_color = Color(0.853622, 0.417929, 0, 1)
 
-[node name="Chicken" type="CharacterBody3D"]
+[node name="Chicken" type="CharacterBody3D" groups=["chicken"]]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_mrid6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_3bfq1")
+shape = SubResource("SphereShape3D_k42xu")
 
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("BoxMesh_ohjl8")
+mesh = SubResource("SphereMesh_cfc0m")
 surface_material_override/0 = SubResource("StandardMaterial3D_s8h8o")
