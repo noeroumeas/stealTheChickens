@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c026nylwp8hm6"]
+[gd_scene load_steps=7 format=3 uid="uid://c026nylwp8hm6"]
 
 [ext_resource type="Script" path="res://WinMenu.gd" id="1_4tgho"]
 [ext_resource type="Texture2D" uid="uid://ko1rrawx77t4" path="res://logo.png" id="2_j3an4"]
 [ext_resource type="PackedScene" uid="uid://2emagupuakrt" path="res://victory_sound.tscn" id="3_0qpkd"]
 [ext_resource type="PackedScene" uid="uid://dl3b23lk3s5dm" path="res://victory_theme_music.tscn" id="4_ufrr4"]
+[ext_resource type="Texture2D" uid="uid://cd6vlbleqmfr3" path="res://background.jpg" id="5_6ueof"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_af4ka"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="WinMenu" type="Control"]
 layout_mode = 3
@@ -49,6 +53,7 @@ offset_right = 38.0
 offset_bottom = 141.0
 grow_horizontal = 2
 text = "You won !"
+label_settings = SubResource("LabelSettings_af4ka")
 
 [node name="Logo" type="Control" parent="."]
 layout_mode = 1
@@ -69,3 +74,9 @@ texture = ExtResource("2_j3an4")
 [node name="VictorySound" parent="." instance=ExtResource("3_0qpkd")]
 
 [node name="VictoryThemeMusic" parent="." instance=ExtResource("4_ufrr4")]
+
+[node name="Background" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(978, 533)
+scale = Vector2(0.726934, 0.695312)
+texture = ExtResource("5_6ueof")

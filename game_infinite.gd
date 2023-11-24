@@ -6,8 +6,12 @@ extends Node3D
 var chickens = []
 var farmers = []
 
+var deletedChickens = []
+
 var numberChickens = 5
 var numberFarmers = 1
+
+var score = 0
 
 func _ready():
 	Global.game_scene = self.scene_file_path
@@ -20,7 +24,7 @@ func start_main_game_music():
 	$GameMainMusic.play()
 
 func init_number_chicken_left_label():
-	$UserInterface/NumberChickensLeftLabel.set_chicken_number(numberChickens)
+	$UserInterface/NumberChickensCatchedLabel.set_chicken_number(0)
 
 func generate_chickens():
 	for i in range(numberChickens) :
@@ -37,12 +41,18 @@ func generate_chicken():
 	add_child(chicken)
 	
 	chicken.catched.connect(on_chicken_catched.bind())
-	chicken.catched.connect($UserInterface/NumberChickensLeftLabel._on_chicken_catched.bind())
+	chicken.catched.connect($UserInterface/NumberChickensCatchedLabel._on_chicken_catched.bind())
 
 func on_chicken_catched(chicken):
+	if(deletedChickens.find(chicken) != -1):
+		return
+	deletedChickens.append(chicken)
 	chickens.erase(chicken)
-	if(len(chickens) == 0):
-		win_game()
+	score= score+1
+	generate_chicken()
+	if(score%10==0):
+		generate_farmer()
+		
 		
 
 func win_game():
@@ -92,7 +102,7 @@ func lost_game():
 	get_tree().change_scene_to_file("res://lost_menu.tscn")
 
 func end_game():
-	$UserInterface/NumberChickensLeftLabel.hide()
+	$UserInterface/NumberChickensCatchedLabel.hide()
 	stopTimers()
 	delete_all_objects()
 

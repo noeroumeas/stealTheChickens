@@ -1,13 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxatnpyg8xf5d"]
+[gd_scene load_steps=18 format=3 uid="uid://cxatnpyg8xf5d"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_4jh1g"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g410k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5r5n"]
-albedo_color = Color(0, 0.878431, 0.878431, 1)
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_aje6n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kcrj"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5ag35"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlm1e"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cgemv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s743c"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_km0wi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1pld2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mhqki"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmm6q"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ywquv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_05tfe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0cp1"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rc1a"]
+size = Vector3(1, 2.5, 0.78)
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 14
@@ -15,10 +48,78 @@ script = ExtResource("1_4jh1g")
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("BoxMesh_g410k")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_g5r5n")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="Pivot/Body"]
+transform = Transform3D(0.3, 0, 0, 0, -3.27835e-08, -0.3, 0, 0.75, -1.31134e-08, -0.547, 0.33, -0.5)
+mesh = SubResource("CapsuleMesh_aje6n")
+surface_material_override/0 = SubResource("StandardMaterial3D_0kcrj")
+
+[node name="ArmRight" type="MeshInstance3D" parent="Pivot/Body"]
+transform = Transform3D(0.3, 0, 0, 0, -3.27835e-08, -0.3, 0, 0.75, -1.31134e-08, 0.547, 0.33, -0.5)
+mesh = SubResource("CapsuleMesh_aje6n")
+surface_material_override/0 = SubResource("StandardMaterial3D_0kcrj")
+
+[node name="Flashlight" type="Node3D" parent="Pivot/Body/ArmRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.32907e-15, 0, -1.42109e-14, 1, 0, -0.895218, -1.19209e-07)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Body/ArmRight/Flashlight"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("CylinderMesh_5ag35")
+surface_material_override/0 = SubResource("StandardMaterial3D_hlm1e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Pivot/Body/ArmRight/Flashlight"]
+transform = Transform3D(0.5, 0, 0, 0, 0.075, 5.3829e-15, 0, -8.07435e-16, 0.5, 0, -0.385, 0)
+mesh = SubResource("CylinderMesh_5ag35")
+surface_material_override/0 = SubResource("StandardMaterial3D_hlm1e")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Pivot/Body/ArmRight/Flashlight"]
+transform = Transform3D(3.33333, 0, 0, 0, -5.82818e-08, 1.77778, 0, -3.33333, -1.94273e-07, 0.118204, -0.396012, -0.0610019)
+light_energy = 10.0
+spot_range = 20.0
+spot_angle = 20.0
+
+[node name="LegRight" type="MeshInstance3D" parent="Pivot/Body"]
+transform = Transform3D(0.33, 0, 0, 0, 0.5, 0, 0, 0, 0.33, 0.25, -0.8, 0)
+mesh = SubResource("CapsuleMesh_cgemv")
+surface_material_override/0 = SubResource("StandardMaterial3D_s743c")
+
+[node name="LegLeft" type="MeshInstance3D" parent="Pivot/Body"]
+transform = Transform3D(0.33, 0, 0, 0, 0.5, 0, 0, 0, 0.33, -0.25, -0.8, 0)
+mesh = SubResource("CapsuleMesh_cgemv")
+surface_material_override/0 = SubResource("StandardMaterial3D_s743c")
+
+[node name="Neck" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.33, 0, 0, 0, 0.2, 0, 0, 0, 0.33, 0, 0.6, 0)
+mesh = SubResource("CylinderMesh_km0wi")
+surface_material_override/0 = SubResource("StandardMaterial3D_1pld2")
+
+[node name="Head" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, 0.89402, 0)
+mesh = SubResource("SphereMesh_mhqki")
+surface_material_override/0 = SubResource("StandardMaterial3D_hmm6q")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.2, 0.2, -0.4)
+mesh = SubResource("SphereMesh_ywquv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head/EyeRight"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.1, -0.275)
+mesh = SubResource("SphereMesh_05tfe")
+surface_material_override/0 = SubResource("StandardMaterial3D_u0cp1")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.2, 0.2, -0.4)
+mesh = SubResource("SphereMesh_ywquv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head/EyeLeft"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.1, -0.275)
+mesh = SubResource("SphereMesh_05tfe")
+surface_material_override/0 = SubResource("StandardMaterial3D_u0cp1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_4rc1a")

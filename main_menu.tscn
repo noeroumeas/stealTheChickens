@@ -1,15 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://r531qrc0xhlt"]
+[gd_scene load_steps=6 format=3 uid="uid://r531qrc0xhlt"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_hqs4c"]
 [ext_resource type="Texture2D" uid="uid://ko1rrawx77t4" path="res://logo.png" id="2_tmj0j"]
 [ext_resource type="PackedScene" uid="uid://3crjbalcsqbp" path="res://main_menu_theme_music.tscn" id="3_i4d42"]
+[ext_resource type="Texture2D" uid="uid://cd6vlbleqmfr3" path="res://background.jpg" id="4_k8o13"]
+
+[sub_resource type="Theme" id="Theme_yhjx3"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_yhjx3")
 script = ExtResource("1_hqs4c")
 
 [node name="PlayButton" type="Button" parent="."]
@@ -22,7 +27,7 @@ offset_top = 182.0
 offset_right = 22.0
 offset_bottom = 213.0
 grow_horizontal = 2
-text = "Play"
+text = "Play level 1"
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 1
@@ -30,9 +35,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -19.0
-offset_top = 225.0
+offset_top = 291.0
 offset_right = 23.0
-offset_bottom = 256.0
+offset_bottom = 322.0
 grow_horizontal = 2
 text = "Quit"
 
@@ -53,3 +58,33 @@ scale = Vector2(0.221519, 0.221519)
 texture = ExtResource("2_tmj0j")
 
 [node name="MainMenuThemeMusic" parent="." instance=ExtResource("3_i4d42")]
+
+[node name="PlayInfiniteButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 221.0
+offset_right = 51.5
+offset_bottom = 252.0
+grow_horizontal = 2
+text = "Play infinite"
+
+[node name="PlayDuoButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = 257.0
+offset_right = 53.0
+offset_bottom = 288.0
+grow_horizontal = 2
+text = "Play Duo"
+
+[node name="Background" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(978, 533)
+scale = Vector2(0.726934, 0.695312)
+texture = ExtResource("4_k8o13")

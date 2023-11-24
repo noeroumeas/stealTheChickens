@@ -1,14 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn3d3dbdhsgkp"]
+[gd_scene load_steps=13 format=3 uid="uid://bn3d3dbdhsgkp"]
 
 [ext_resource type="Script" path="res://chicken.gd" id="1_mrid6"]
 [ext_resource type="AudioStream" uid="uid://cgg1pe0am2lgt" path="res://chicken_sound.mp3" id="2_7m6i6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k42xu"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_27guh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxo2h"]
+albedo_color = Color(0.854902, 0.419608, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_30chf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jgjoj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8baj5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_rmrjb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj2lq"]
+albedo_color = Color(1, 0.733333, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_cfc0m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8h8o"]
-albedo_color = Color(0.853622, 0.417929, 0, 1)
+albedo_color = Color(0.854902, 0.419608, 0, 1)
 
 [node name="Chicken" type="CharacterBody3D" groups=["chicken"]]
 collision_layer = 2
@@ -19,8 +36,39 @@ script = ExtResource("1_mrid6")
 shape = SubResource("SphereShape3D_k42xu")
 
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+[node name="Head" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.4, 0, 0, 0, 0.361034, -0.172204, 0, 0.172204, 0.361034, 0, 0.3801, 0.33416)
+mesh = SubResource("CapsuleMesh_27guh")
+skeleton = NodePath("../Body")
+surface_material_override/0 = SubResource("StandardMaterial3D_sxo2h")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(0.0646722, -0.0110785, 0.0754638, 0.0357842, 0.0917818, -0.0171929, -0.0673573, 0.0381231, 0.0633216, 0.264, 0.893, 0.129)
+mesh = SubResource("SphereMesh_30chf")
+skeleton = NodePath("../EyeRight")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head/EyeLeft"]
+transform = Transform3D(0.4, 0, -9.68575e-08, -1.49012e-08, 0.4, 1.49012e-08, 1.49012e-08, 1.49012e-08, 0.4, -0.00982094, 0.359949, 0.0612564)
+mesh = SubResource("SphereMesh_jgjoj")
+surface_material_override/0 = SubResource("StandardMaterial3D_8baj5")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(0.0833377, -0.0357953, -0.0750463, 0.0536929, 0.0917632, -0.0172688, 0.112569, -0.0172687, 0.0637952, -0.263799, 0.892582, 0.12888)
+mesh = SubResource("SphereMesh_30chf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head/EyeRight"]
+transform = Transform3D(0.4, 0, -9.68575e-08, -1.49012e-08, 0.4, 1.11759e-08, 2.98023e-08, 1.86265e-08, 0.4, -0.00982046, 0.359951, 0.0612569)
+mesh = SubResource("SphereMesh_jgjoj")
+surface_material_override/0 = SubResource("StandardMaterial3D_8baj5")
+
+[node name="Beak" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(0.9, 0, 0, 0, 0.406178, -0.456897, 0, 0.913794, 0.203089, 0, 0.571961, 0.448284)
+mesh = SubResource("PrismMesh_rmrjb")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj2lq")
+
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("SphereMesh_cfc0m")
 surface_material_override/0 = SubResource("StandardMaterial3D_s8h8o")
 

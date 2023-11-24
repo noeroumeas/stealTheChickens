@@ -1,12 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://ch63kee6kg1v6"]
+[gd_scene load_steps=19 format=3 uid="uid://badh8puhlnaax"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_vtwrw"]
-[ext_resource type="PackedScene" uid="uid://bn3d3dbdhsgkp" path="res://chicken.tscn" id="2_6yjqb"]
-[ext_resource type="PackedScene" uid="uid://b3maos1bmde40" path="res://farmer.tscn" id="3_2f2yj"]
-[ext_resource type="PackedScene" uid="uid://cxatnpyg8xf5d" path="res://player.tscn" id="4_pvgp8"]
-[ext_resource type="Script" path="res://NumberChickensLeftLabel.gd" id="5_f3opp"]
-[ext_resource type="Shader" path="res://wood.gdshader" id="5_jvjgx"]
-[ext_resource type="PackedScene" uid="uid://cecgy5ts0eynj" path="res://game_main_music.tscn" id="6_ogcdl"]
+[ext_resource type="Script" path="res://game_infinite.gd" id="1_ijgw6"]
+[ext_resource type="PackedScene" uid="uid://bn3d3dbdhsgkp" path="res://chicken.tscn" id="2_2nm0k"]
+[ext_resource type="PackedScene" uid="uid://b3maos1bmde40" path="res://farmer.tscn" id="3_5wmyx"]
+[ext_resource type="PackedScene" uid="uid://cxatnpyg8xf5d" path="res://player.tscn" id="4_kbars"]
+[ext_resource type="Shader" path="res://wood.gdshader" id="5_jv02t"]
+[ext_resource type="Script" path="res://game_infinite_label_chicken.gd" id="6_2oth7"]
+[ext_resource type="PackedScene" uid="uid://cecgy5ts0eynj" path="res://game_main_music.tscn" id="7_xcen8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vgxbu"]
 
@@ -26,7 +26,7 @@ point_count = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_24ueb"]
 render_priority = 0
-shader = ExtResource("5_jvjgx")
+shader = ExtResource("5_jv02t")
 shader_parameter/ring_scale = 4.4
 shader_parameter/wave_scale = 8.454
 shader_parameter/random_scale = 4.6
@@ -48,12 +48,12 @@ plane = Plane(0, 0, -1, -15)
 default_font_size = 22
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_vtwrw")
-chicken_scene = ExtResource("2_6yjqb")
-farmer_scene = ExtResource("3_2f2yj")
+script = ExtResource("1_ijgw6")
+chicken_scene = ExtResource("2_2nm0k")
+farmer_scene = ExtResource("3_5wmyx")
 
-[node name="Player" parent="." instance=ExtResource("4_pvgp8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Player" parent="." instance=ExtResource("4_kbars")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28867, 0)
 
 [node name="CameraPivot" type="Marker3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.5, 0)
@@ -165,7 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_yeo8b")
 
-[node name="NumberChickensLeftLabel" type="Label" parent="UserInterface"]
+[node name="NumberChickensCatchedLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
 offset_left = 68.0
 offset_top = 39.0
@@ -173,7 +173,7 @@ offset_right = 189.0
 offset_bottom = 65.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Chickens left :"
-script = ExtResource("5_f3opp")
+script = ExtResource("6_2oth7")
 
 [node name="ChickenTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -183,7 +183,7 @@ autostart = true
 wait_time = 0.2
 autostart = true
 
-[node name="GameMainMusic" parent="." instance=ExtResource("6_ogcdl")]
+[node name="GameMainMusic" parent="." instance=ExtResource("7_xcen8")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)

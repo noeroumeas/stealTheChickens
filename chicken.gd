@@ -49,7 +49,6 @@ func catch():
 
 
 func _on_sound_effect_play_timeout():
-	print('here')
 	play_sound_effect();
 
 func play_sound_effect():
